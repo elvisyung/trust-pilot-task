@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual environment
+venv/
+.env/
+
+# SQLite database files
+*.db
+
+# Logs and debug files
+*.log
+*.out
+
+# Test coverage reports
+htmlcov/
+.coverage
+*.cover
+*.py,cover
+
+# pytest cache
+.cache/
+
+# Temporary files and directories
+*.tmp
+*.temp
+*.swp
+*.swo
+*.DS_Store
+
+# IDE-specific files
+.vscode/
+.idea/
