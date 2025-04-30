@@ -1,4 +1,3 @@
-import pandas as pd
 import sqlite3
 from src.ingest import ingest_csv_to_db
 

@@ -52,7 +52,7 @@ def clean_data(df):
     # Drop rows with missing values
     return df.dropna()
 
-def ingest_csv_to_db(csv_path, db_path='reviews.db'):
+def ingest_csv_to_db(csv_path, db_path='data/reviews.db'):
     """Ingest a CSV file into the SQLite database."""
     conn = None
     try:
