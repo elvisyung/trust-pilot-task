@@ -1,4 +1,4 @@
-# Trustpilot Sample Review Ingestion (Take Home Project)
+# Trustpilot Sample Reviews Ingestion (Take Home Project)
 
 ## Overview
 
