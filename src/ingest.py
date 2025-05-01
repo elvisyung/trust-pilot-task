@@ -3,32 +3,6 @@ import re
 import sqlite3
 from src.db import get_connection, create_reviews_table
 
-def is_valid_email(email):
-    """Check if the email address is valid."""
-    email_regex = r"[^@]+@[^@]+\.[^@]+"
-    return email if re.match(email_regex, str(email)) else None
-
-def clean_review_rating(rating):
-    """Convert rating to an integer if valid, otherwise return None."""
-    if str(rating).isdigit() and 1 <= int(rating) <= 5:
-        return int(rating)
-    return None
-
-def remove_emojis(text):
-    """Remove emojis from the given text."""
-    emoji_pattern = re.compile(
-        "["
-        "\U0001F600-\U0001F64F"  # Emoticons
-        "\U0001F300-\U0001F5FF"  # Symbols & Pictographs
-        "\U0001F680-\U0001F6FF"  # Transport & Map Symbols
-        "\U0001F1E0-\U0001F1FF"  # Flags (iOS)
-        "\U00002702-\U000027B0"  # Dingbats
-        "\U000024C2-\U0001F251"  # Enclosed Characters
-        "]+",
-        flags=re.UNICODE,
-    )
-    return emoji_pattern.sub(r'', str(text)) if text else text
-
 def clean_data(df):
     """Clean the input DataFrame."""
     # Normalize column names
@@ -77,3 +51,29 @@ def ingest_csv_to_db(csv_path, db_path='data/reviews.db'):
         if conn:
             conn.close()
             print("Database connection closed.")
+
+def is_valid_email(email):
+    """Check if the email address is valid."""
+    email_regex = r"[^@]+@[^@]+\.[^@]+"
+    return email if re.match(email_regex, str(email)) else None
+
+def clean_review_rating(rating):
+    """Convert rating to an integer if valid, otherwise return None."""
+    if str(rating).isdigit() and 1 <= int(rating) <= 5:
+        return int(rating)
+    return None
+
+def remove_emojis(text):
+    """Remove emojis from the given text."""
+    emoji_pattern = re.compile(
+        "["
+        "\U0001F600-\U0001F64F"  # Emoticons
+        "\U0001F300-\U0001F5FF"  # Symbols & Pictographs
+        "\U0001F680-\U0001F6FF"  # Transport & Map Symbols
+        "\U0001F1E0-\U0001F1FF"  # Flags (iOS)
+        "\U00002702-\U000027B0"  # Dingbats
+        "\U000024C2-\U0001F251"  # Enclosed Characters
+        "]+",
+        flags=re.UNICODE,
+    )
+    return emoji_pattern.sub(r'', str(text)) if text else text

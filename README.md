@@ -9,4 +9,4 @@ This project ingests a CSV file of Trustpilot sample reviews, cleans the data an
 ```bash
 pip install -r requirements.txt
 python main.py
-pytest tests/
+python -m pytest
