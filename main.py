@@ -4,14 +4,14 @@ from src.crud import add_review, update_review_content_by_email
 
 def run_pipeline(csv_path: str):
     try:
-        # Step 1: Ingest CSV into DB
+        # Ingest CSV into DB
         ingest_csv_to_db(csv_path)
     except Exception as e:
         print(f"[ERROR] CSV ingestion failed: {e}")
         return False
 
     try:
-        # Step 2: Add example review
+        # Add example review
         add_review({
             "reviewer_name": "Alice Example",
             "review_title": "Amazing Product",
@@ -26,7 +26,7 @@ def run_pipeline(csv_path: str):
         return False
 
     try:
-        # Step 3: Update review content
+        # Update review content
         update_review_content_by_email("johndoe@example.com", "Updated review content.")
     except Exception as e:
         print(f"[ERROR] Failed to update review: {e}")
