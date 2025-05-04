@@ -1,11 +1,12 @@
 import sqlite3
+from sqlite3 import Connection
 
-def get_connection(db_path='data/reviews.db'):
+def get_connection(db_path: str = 'data/reviews.db') -> Connection:
     """Create a connection to the SQLite database."""
     conn = sqlite3.connect(db_path)
     return conn
 
-def create_reviews_table(conn):
+def create_reviews_table(conn: Connection) -> None:
     """Create the reviews table with an auto-incrementing id column."""
     cursor = conn.cursor()
     cursor.execute("""

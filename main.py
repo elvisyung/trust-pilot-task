@@ -2,7 +2,8 @@ import sys
 from src.ingest import ingest_csv_to_db
 from src.crud import add_review, update_review_content_by_email
 
-def run_pipeline(csv_path: str):
+def run_pipeline(csv_path: str) -> bool:
+    """Run the data pipeline: ingest CSV, add a review, and update a review."""
     try:
         # Ingest CSV into DB
         ingest_csv_to_db(csv_path)
@@ -36,6 +37,6 @@ def run_pipeline(csv_path: str):
     return True
 
 if __name__ == "__main__":
-    success = run_pipeline("data/dataops_tp_reviews.csv")
+    success: bool = run_pipeline("data/dataops_tp_reviews.csv")
     if not success:
         sys.exit(1)

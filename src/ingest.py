@@ -1,9 +1,11 @@
 import pandas as pd
 import re
 import sqlite3
+from typing import Optional
+from pandas import DataFrame
 from src.db import get_connection, create_reviews_table
 
-def clean_data(df):
+def clean_data(df: DataFrame) -> DataFrame:
     """Clean the input DataFrame."""
     # Normalize column names
     df.columns = [c.strip().lower().replace(" ", "_") for c in df.columns]
@@ -26,9 +28,9 @@ def clean_data(df):
     # Drop rows with missing values
     return df.dropna()
 
-def ingest_csv_to_db(csv_path, db_path='data/reviews.db'):
+def ingest_csv_to_db(csv_path: str, db_path: str = 'data/reviews.db') -> None:
     """Ingest a CSV file into the SQLite database."""
-    conn = None
+    conn: Optional[sqlite3.Connection] = None
     try:
         # Read and clean the data
         df = pd.read_csv(csv_path)
@@ -52,18 +54,18 @@ def ingest_csv_to_db(csv_path, db_path='data/reviews.db'):
             conn.close()
             print("Database connection closed.")
 
-def is_valid_email(email):
+def is_valid_email(email: Optional[str]) -> Optional[str]:
     """Check if the email address is valid."""
     email_regex = r"[^@]+@[^@]+\.[^@]+"
-    return email if re.match(email_regex, str(email)) else None
+    return email if email and re.match(email_regex, email) else None
 
-def clean_review_rating(rating):
+def clean_review_rating(rating: Optional[str]) -> Optional[int]:
     """Convert rating to an integer if valid, otherwise return None."""
     if str(rating).isdigit() and 1 <= int(rating) <= 5:
         return int(rating)
     return None
 
-def remove_emojis(text):
+def remove_emojis(text: Optional[str]) -> Optional[str]:
     """Remove emojis from the given text."""
     emoji_pattern = re.compile(
         "["
@@ -76,4 +78,4 @@ def remove_emojis(text):
         "]+",
         flags=re.UNICODE,
     )
-    return emoji_pattern.sub(r'', str(text)) if text else text
+    return emoji_pattern.sub(r'', text) if text else text

@@ -1,7 +1,8 @@
 from src.db import get_connection
 import sqlite3
+from typing import Dict
 
-def add_review(review, db_path='data/reviews.db'):
+def add_review(review: Dict[str, str], db_path: str = 'data/reviews.db') -> None:
     """Add a new review to the database."""
     conn = get_connection(db_path)
     cursor = conn.cursor()
@@ -40,7 +41,7 @@ def add_review(review, db_path='data/reviews.db'):
     finally:
         conn.close()
 
-def update_review_content_by_email(email, new_content, db_path='data/reviews.db'):
+def update_review_content_by_email(email: str, new_content: str, db_path: str = 'data/reviews.db') -> None:
     """Update the content of a review by the email address."""
     conn = None
     try:
